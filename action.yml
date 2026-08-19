@@ -1,0 +1,68 @@
+name: sinkstate
+description: Find the states your agent graph can enter but never leave, and fail the build when one appears.
+author: Profullstack, Inc.
+
+branding:
+  icon: alert-triangle
+  color: red
+
+inputs:
+  files:
+    description: 'Graph files to analyse. A path, a comma/newline separated list, or a glob such as `graphs/**/*.json`.'
+    required: true
+  entry:
+    description: 'Entry state, for formats that cannot declare one (n8n, mermaid flowcharts).'
+    required: false
+  goal:
+    description: 'Goal ("done") states, comma separated.'
+    required: false
+  unsafe:
+    description: 'States a safe path may not cross, comma separated.'
+    required: false
+  adapter:
+    description: 'Force an adapter (json, langgraph, n8n, mermaid) instead of auto-detecting.'
+    required: false
+  require:
+    description: 'Properties that must pass, comma separated.'
+    required: false
+    default: 'reachable,branch-stable'
+  comment:
+    description: 'Post the report as a pull request comment (updated in place, never appended).'
+    required: false
+    default: 'true'
+  fail-on-error:
+    description: 'Fail the job when a required property fails. Set false to report without blocking.'
+    required: false
+    default: 'true'
+  token:
+    description: 'Token used to comment. Needs `pull-requests: write`.'
+    required: false
+    default: ${{ github.token }}
+
+outputs:
+  dead:
+    description: 'Total dead states across every analysed graph.'
+    value: ${{ steps.sinkstate.outputs.dead }}
+  stable:
+    description: 'true when every required property passed on every graph.'
+    value: ${{ steps.sinkstate.outputs.stable }}
+  files-checked:
+    description: 'How many graph files were analysed.'
+    value: ${{ steps.sinkstate.outputs.files-checked }}
+
+runs:
+  using: composite
+  steps:
+    - id: sinkstate
+      shell: bash
+      run: node "$GITHUB_ACTION_PATH/action/run.mjs"
+      env:
+        INPUT_FILES: ${{ inputs.files }}
+        INPUT_ENTRY: ${{ inputs.entry }}
+        INPUT_GOAL: ${{ inputs.goal }}
+        INPUT_UNSAFE: ${{ inputs.unsafe }}
+        INPUT_ADAPTER: ${{ inputs.adapter }}
+        INPUT_REQUIRE: ${{ inputs.require }}
+        INPUT_COMMENT: ${{ inputs.comment }}
+        INPUT_FAIL_ON_ERROR: ${{ inputs.fail-on-error }}
+        INPUT_TOKEN: ${{ inputs.token }}

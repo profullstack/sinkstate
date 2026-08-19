@@ -1,0 +1,26 @@
+{
+  "name": "@sinkstate/core",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Dead-state analysis for agent graphs. A pure function: graph IR in, result out, no I/O.",
+  "license": "MIT",
+  "main": "./dist/index.js",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "node --test test/*.test.js"
+  },
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "devDependencies": {
+    "typescript": "^5.9.2",
+    "@types/node": "^22.10.2"
+  }
+}

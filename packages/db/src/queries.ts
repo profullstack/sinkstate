@@ -36,3 +36,31 @@ export async function getUserById(db: Db, id: number): Promise<User | null> {
   });
   return (r.rows[0] as unknown as User) ?? null;
 }
+
+export interface PruneResult {
+  loginTokens: number;
+  sessions: number;
+}
+
+/**
+ * Delete auth rows that have expired.
+ *
+ * The reaper's nominal job — pruning expired shared reports — has nothing to do
+ * yet: the paste flow persists nothing, and permalinks are deliberately v2 (see
+ * the PRD's open questions). Expired login tokens and sessions are real rows
+ * that really do accumulate, so it prunes those rather than idling on a TODO.
+ *
+ * Consumed-but-unexpired login tokens are kept on purpose: replay has to stay
+ * detectable, and a deleted row is indistinguishable from one never issued.
+ */
+export async function pruneExpired(db: Db, now = Date.now()): Promise<PruneResult> {
+  const tokens = await db.execute({
+    sql: 'delete from login_tokens where expires_at < ?',
+    args: [now],
+  });
+  const sessions = await db.execute({
+    sql: 'delete from sessions where expires_at < ?',
+    args: [now],
+  });
+  return { loginTokens: tokens.rowsAffected, sessions: sessions.rowsAffected };
+}

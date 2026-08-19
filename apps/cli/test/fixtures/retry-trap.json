@@ -1,0 +1,13 @@
+{
+  "entry": "start",
+  "goal": ["done"],
+  "unsafe": ["exec_shell"],
+  "nodes": ["start", "plan", "exec_shell", "retry", "done"],
+  "edges": [
+    ["start", "plan"],
+    ["plan", "exec_shell"],
+    ["exec_shell", "done"],
+    ["exec_shell", "retry"],
+    ["retry", "retry"]
+  ]
+}

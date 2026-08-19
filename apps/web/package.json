@@ -10,9 +10,10 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@sinkstate/auth": "workspace:*",
-    "@sinkstate/db": "workspace:*",
     "@simplewebauthn/browser": "^13.1.0",
+    "@sinkstate/auth": "workspace:*",
+    "@sinkstate/core": "workspace:*",
+    "@sinkstate/db": "workspace:*",
     "@swc/helpers": "^0.5.23",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
