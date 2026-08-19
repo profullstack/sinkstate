@@ -11,7 +11,7 @@
     "worker": "pnpm --filter @sinkstate/worker start",
     "migrate": "pnpm --filter @sinkstate/db build && pnpm --filter @sinkstate/db migrate",
     "test": "pnpm -r test",
-    "lint": "pnpm --filter @sinkstate/web lint",
+    "lint": "pnpm run build:packages && pnpm --filter @sinkstate/web lint",
     "build:packages": "pnpm --filter @sinkstate/core --filter @sinkstate/db --filter @sinkstate/auth build",
     "build:worker": "pnpm run build:packages && pnpm --filter @sinkstate/worker build",
     "cli": "pnpm --filter sinkstate start"

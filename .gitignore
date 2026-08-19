@@ -12,3 +12,4 @@ coverage/
 *.db-journal
 AGENTS.md
 CLAUDE.md
+*.tsbuildinfo
