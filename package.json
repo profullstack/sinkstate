@@ -1,0 +1,22 @@
+{
+  "name": "sinkstate",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Dead-state analysis for agent graphs \u2014 LangGraph, CrewAI, n8n and plain state machines.",
+  "scripts": {
+    "dev": "pnpm --filter @sinkstate/web dev",
+    "build": "pnpm run build:packages && pnpm --filter @sinkstate/worker build && pnpm --filter @sinkstate/web build",
+    "start": "pnpm --filter @sinkstate/web start",
+    "worker": "pnpm --filter @sinkstate/worker start",
+    "migrate": "pnpm --filter @sinkstate/db build && pnpm --filter @sinkstate/db migrate",
+    "test": "pnpm -r test",
+    "lint": "pnpm --filter @sinkstate/web lint",
+    "build:packages": "pnpm --filter @sinkstate/db --filter @sinkstate/auth build",
+    "build:worker": "pnpm run build:packages && pnpm --filter @sinkstate/worker build"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "packageManager": "pnpm@9.12.0"
+}

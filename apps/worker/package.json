@@ -1,0 +1,18 @@
+{
+  "name": "@sinkstate/worker",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "start": "node dist/index.js",
+    "dev": "node dist/index.js"
+  },
+  "dependencies": {
+    "@sinkstate/db": "workspace:*"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.2",
+    "@types/node": "^22.10.2"
+  }
+}

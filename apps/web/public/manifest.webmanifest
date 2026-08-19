@@ -1,0 +1,16 @@
+{
+  "name": "sinkstate",
+  "short_name": "sinkstate",
+  "description": "Dead-state analysis for agent graphs \u2014 LangGraph, CrewAI, n8n and plain state machines.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#0a0a0a",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

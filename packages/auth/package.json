@@ -1,0 +1,30 @@
+{
+  "name": "@sinkstate/auth",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "./dist/index.js",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "node --test test/*.test.js"
+  },
+  "dependencies": {
+    "@simplewebauthn/server": "^13.1.1",
+    "@sinkstate/db": "workspace:*"
+  },
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "migrations"
+  ],
+  "devDependencies": {
+    "typescript": "^5.9.2",
+    "@types/node": "^22.10.2"
+  }
+}
